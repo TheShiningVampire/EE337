@@ -1,0 +1,108 @@
+A51 MACRO ASSEMBLER  TOGGLE                                                               02/03/2021 13:34:52 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\toggle.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE toggle.asm SET(SMALL) DEBUG PRINT(.\Listings\toggle.lst) OBJECT(.\Objec
+                      ts\toggle.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00H
+0000 020100            2     ljmp START
+                       3     
+0100                   4     org 100H
+0100 E590              5             START: MOV A,P1
+0102 540F              6             ANL A,#0FH
+0104 F8                7             MOV R0,A
+0105 F9                8             MOV R1,A
+                       9             
+0106 C294             10             CLR P1.4
+0108 C295             11             CLR P1.5
+010A C296             12             CLR P1.6
+010C C297             13             CLR P1.7
+                      14             
+010E 7400             15             MOV A, #00H
+                      16             
+0110                  17             TOGGLE:
+0110 89F0             18             MOV B, R1
+0112 A8F0             19             MOV R0,B
+0114 20E004           20             JB ACC.0, L1
+0117 C294             21             CLR P1.4
+0119 8002             22             SJMP L11
+011B D294             23             L1: SETB P1.4
+011D 20E104           24             L11: JB ACC.1, L2
+0120 C295             25             CLR P1.5
+0122 8002             26             SJMP L22
+0124 D295             27             L2: SETB P1.5
+0126 20E204           28             L22: JB ACC.2, L3
+0129 C296             29             CLR P1.6
+012B 8002             30             SJMP L33
+012D D296             31             L3: SETB P1.6
+012F 20E304           32             L33: JB ACC.3, L4
+0132 C297             33             CLR P1.7
+0134 8002             34             SJMP L44
+0136 D297             35             L4: SETB P1.7
+0138 510F             36             L44: ACALL DELAY
+013A D8FC             37             DJNZ R0, L44
+013C 2401             38             ADD A, #01H
+013E 020110           39             LJMP TOGGLE
+                      40                     
+                      41             
+0200                  42     org 200H
+0200                  43             one_milli_delay :  
+0200 C007             44             PUSH 07h
+0202 7FFA             45             MOV R7, #250d
+0204                  46             LOOP_1_MILLI : 
+0204 00               47                     NOP ; NOPs to cause delay
+0205 00               48                     NOP 
+0206 00               49                     NOP
+0207 00               50                     NOP
+0208 00               51                     NOP
+0209 00               52                     NOP
+020A DFF8             53                     DJNZ R7, LOOP_1_MILLI 
+020C D007             54             POP 07h 
+020E 22               55             RET
+                      56             
+020F                  57             DELAY :  
+A51 MACRO ASSEMBLER  TOGGLE                                                               02/03/2021 13:34:52 PAGE     2
+
+020F C007             58             PUSH 07h
+0211 7FFA             59             MOV R7, #250d
+0213                  60             loop_1 : 
+0213 120200           61                     LCALL one_milli_delay;
+0216 DFFB             62                     DJNZ R7, loop_1;
+0218 D007             63             POP 07h
+021A 22               64             RET
+                      65     END
+A51 MACRO ASSEMBLER  TOGGLE                                                               02/03/2021 13:34:52 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+DELAY. . . . . . .  C ADDR   020FH   A   
+L1 . . . . . . . .  C ADDR   011BH   A   
+L11. . . . . . . .  C ADDR   011DH   A   
+L2 . . . . . . . .  C ADDR   0124H   A   
+L22. . . . . . . .  C ADDR   0126H   A   
+L3 . . . . . . . .  C ADDR   012DH   A   
+L33. . . . . . . .  C ADDR   012FH   A   
+L4 . . . . . . . .  C ADDR   0136H   A   
+L44. . . . . . . .  C ADDR   0138H   A   
+LOOP_1 . . . . . .  C ADDR   0213H   A   
+LOOP_1_MILLI . . .  C ADDR   0204H   A   
+ONE_MILLI_DELAY. .  C ADDR   0200H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+START. . . . . . .  C ADDR   0100H   A   
+TOGGLE . . . . . .  C ADDR   0110H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

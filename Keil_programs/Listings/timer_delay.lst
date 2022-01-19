@@ -1,0 +1,90 @@
+A51 MACRO ASSEMBLER  TIMER_DELAY                                                          02/17/2021 13:58:36 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\timer_delay.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE timer_delay.asm SET(SMALL) DEBUG PRINT(.\Listings\timer_delay.lst) OBJE
+                      CT(.\Objects\timer_delay.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00H
+0000 020100            2     ljmp START
+                       3     
+                       4     
+0100                   5     org 100H
+0100                   6             START:
+                       7             
+0100 79C3              8             MOV R1,#0C3H
+0102 7850              9             MOV R0,#50H
+                      10             
+0104 5100             11             ACALL COMPLEMENT_2
+0106 C294             12             CLR P1.4
+0108 C295             13             CLR P1.5
+010A C296             14             CLR P1.6
+010C C297             15             CLR P1.7
+010E 7B28             16     BEGIN: MOV R3,#40d      
+0110 7100             17     HERE: ACALL DELAY
+0112 DBFC             18     TOGGLE:DJNZ R3, HERE
+0114 B294             19             CPL P1.4
+0116 B295             20             CPL P1.5
+0118 B296             21             CPL P1.6
+011A B297             22             CPL P1.7
+011C 02010E           23             LJMP BEGIN      
+                      24             
+                      25             
+0200                  26     org 200H
+0200                  27             COMPLEMENT_2:
+0200 E9               28             MOV A, R1
+0201 F4               29             CPL A
+0202 F9               30             MOV R1, A       
+0203 E8               31             MOV A, R0
+0204 F4               32             CPL A
+0205 2401             33             ADD A, #01H
+0207 F8               34             MOV R0, A
+0208 E9               35             MOV A, R1
+0209 3400             36             ADDC A,#00H
+020B F9               37             MOV R1, A
+                      38             
+020C 22               39             RET
+                      40             
+0300                  41     org 300H
+0300                  42             DELAY:
+0300 758901           43             MOV TMOD, #01b
+0303 888A             44             MOV TL0, R0
+0305 898C             45             MOV TH0, R1
+0307 D28C             46             SETB TR0
+0309 308DFD           47     Loop:JNB TF0, Loop
+030C C28C             48             CLR TR0
+030E C28D             49             CLR TF0
+0310 22               50             RET
+                      51     
+                      52             
+                      53     END
+A51 MACRO ASSEMBLER  TIMER_DELAY                                                          02/17/2021 13:58:36 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BEGIN. . . . . . .  C ADDR   010EH   A   
+COMPLEMENT_2 . . .  C ADDR   0200H   A   
+DELAY. . . . . . .  C ADDR   0300H   A   
+HERE . . . . . . .  C ADDR   0110H   A   
+LOOP . . . . . . .  C ADDR   0309H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+START. . . . . . .  C ADDR   0100H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TOGGLE . . . . . .  C ADDR   0112H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

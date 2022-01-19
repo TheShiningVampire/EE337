@@ -1,0 +1,33 @@
+org 0000H
+ljmp start
+
+org 100H
+	start: MOV 50H,#0AH
+	MOV 51H,#60H
+	MOV 52H,#69H
+	MOV A, #05H
+	MOV R1,#60H
+	MOV R6,50H
+	Loop1: MOV @R1, A
+	INC A
+	INC R1
+	DJNZ R6, Loop1
+	ACALL MEMCPY
+	
+	here:SJMP here
+
+org 150H
+	MEMCPY: MOV R2,50H
+	MOV R0,51H
+	MOV R1,52H
+	LOOP: MOV A,@R0
+	MOV B,A
+	MOV A, @R1
+	MOV @R0, A
+	MOV A,B
+	MOV @R1, A
+	INC R0
+	INC R1
+	DJNZ R2, LOOP
+	RET
+end

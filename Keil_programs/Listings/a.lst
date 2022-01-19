@@ -1,0 +1,34 @@
+A51 MACRO ASSEMBLER  A                                                                    01/20/2021 18:52:03 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\a.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE a.asm SET(SMALL) DEBUG PRINT(.\Listings\a.lst) OBJECT(.\Objects\a.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     Org 0h
+0000 020100            2     ljmp main; jump to label "main"
+0100                   3     Org 100h
+0100                   4     main:
+                       5             
+0100 D2F0              6             SETB B.0
+0102 80FE              7     HERE:SJMP HERE          
+                       8     END
+A51 MACRO ASSEMBLER  A                                                                    01/20/2021 18:52:03 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+HERE . . . . . . .  C ADDR   0102H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,72 @@
+A51 MACRO ASSEMBLER  Q_2                                                                  01/27/2021 14:43:11 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\q_2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE q_2.asm SET(SMALL) DEBUG PRINT(.\Listings\q_2.lst) OBJECT(.\Objects\q_2
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0h
+0000 020100            2     ljmp main;
+0100                   3     org 100h
+0100                   4     main:
+0100 7560FF            5     mov 60h,#0ffh
+0103 7561FF            6     mov 61h,#0ffh
+                       7     
+0106 E560              8     mov a,60h
+0108 23                9     rl a
+0109 F567             10     mov 67h,a
+010B 536701           11     anl 67h,#01h
+                      12     
+010E E561             13     mov a,61h
+0110 23               14     rl a
+0111 F568             15     mov 68h,a
+0113 536801           16     anl 68h,#01h
+                      17     
+0116 E567             18     mov a,67h
+0118 6568             19     xrl a,68h
+011A F569             20     mov 69h,a
+                      21     
+                      22     
+                      23     
+011C E560             24     mov a,60h
+011E 2561             25     add a,61h
+0120 F562             26     mov 62h,a
+0122 23               27     rl a
+0123 5401             28     anl a,#01h
+0125 F570             29     mov 70h,a
+0127 E569             30     mov a,69h
+0129 6004             31     jz loop
+012B D2D5             32     setb psw.5
+012D 800C             33     sjmp here
+012F                  34     loop:
+012F E568             35     mov a,68h
+0131 6570             36     xrl a,70h
+0133 6004             37     jz l2
+0135 C2D5             38     clr psw.5
+0137 8002             39     sjmp here
+0139 D2D5             40     l2:setb psw.5
+                      41     
+013B 80FE             42     here: SJMP here
+                      43     end
+A51 MACRO ASSEMBLER  Q_2                                                                  01/27/2021 14:43:11 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   013BH   A   
+L2 . . . . . . . .  C ADDR   0139H   A   
+LOOP . . . . . . .  C ADDR   012FH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

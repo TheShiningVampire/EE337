@@ -1,0 +1,277 @@
+A51 MACRO ASSEMBLER  LAB1_2                                                               01/20/2021 14:39:46 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\lab1_2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE lab1_2.asm SET(SMALL) DEBUG PRINT(.\Listings\lab1_2.lst) OBJECT(.\Objec
+                      ts\lab1_2.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; for 72H
+0000 E570              2     mov A, 70H;
+0002 A2E0              3     mov C, Acc.0;
+0004 92F0              4     mov B.0, C;
+0006 A2E1              5     mov C, Acc.1;
+0008 92F1              6     mov B.1, C;
+000A A2E2              7     mov C, Acc.2;
+000C 92F2              8     mov B.2, C;
+000E A2E3              9     mov C, Acc.3;
+0010 92F3             10     mov B.3, C;
+                      11     
+                      12     ;### making of B4
+0012 A2F2             13     mov C, B.2;
+0014 92E0             14     mov Acc.0, C;
+0016 6570             15     xrl A, 70H;
+                      16     
+0018 A2E0             17     mov C, Acc.0;
+001A 92E3             18     mov Acc.3, C;
+001C 6570             19     xrl A, 70H;
+                      20     
+001E A2E3             21     mov C, Acc.3;
+0020 92F4             22     mov B.4, C;
+                      23     
+                      24     
+                      25     ;## making of B5
+0022 A2F1             26     mov C, B.1;
+0024 92E0             27     mov Acc.0, C;
+0026 6570             28     xrl A, 70H;
+                      29     
+0028 A2E0             30     mov C, Acc.0;
+002A 92E3             31     mov Acc.3, C;
+002C 6570             32     xrl A, 70H;
+002E A2E3             33     mov C, acc.3;
+0030 92F5             34     mov B.5, C;
+                      35     
+                      36     
+                      37     ;### making of B6
+0032 A2F2             38     mov C, B.2;
+0034 92E1             39     mov Acc.1, C;
+0036 6570             40     xrl A, 70H;
+                      41     
+0038 A2E1             42     mov C, Acc.1;
+003A 92E3             43     mov Acc.3, C;
+003C 6570             44     xrl A, 70H;
+003E A2E3             45     mov C, acc.3;
+0040 92F6             46     mov B.6, C;
+                      47     
+                      48     
+0042 537280           49     anl 72H, #80H;
+0045 C2F7             50     clr B.7;
+0047 E5F0             51     mov A, B;
+0049 4272             52     orl 72H, A;
+                      53     
+                      54     
+                      55     
+                      56     
+                      57     
+A51 MACRO ASSEMBLER  LAB1_2                                                               01/20/2021 14:39:46 PAGE     2
+
+                      58     
+                      59     
+                      60     
+                      61     ;## for 73H
+                      62     
+004B E570             63     mov A, 70H;
+004D A2E4             64     mov C, acc.4;
+004F 92F0             65     mov B.0, C;
+0051 A2E5             66     mov C, acc.5;
+0053 92F1             67     mov B.1, C;
+0055 A2E6             68     mov C, acc.6;
+0057 92F2             69     mov B.2, C;
+0059 A2E7             70     mov C, acc.7;
+005B 92F3             71     mov B.3, C;
+                      72     
+                      73     ;### making of B4
+005D A2F2             74     mov C, B.2;
+005F 92E4             75     mov Acc.4, C;
+0061 6570             76     xrl A, 70H;
+                      77     
+0063 A2E4             78     mov C, Acc.4;
+0065 92E7             79     mov Acc.7, C;
+0067 6570             80     xrl A, 70H;
+                      81     
+0069 A2E7             82     mov C, Acc.7;
+006B 92F4             83     mov B.4, C;
+                      84     
+                      85     
+                      86     ;## making of B5
+006D A2F1             87     mov C, B.1;
+006F 92E4             88     mov Acc.4, C;
+0071 6570             89     xrl A, 70H;
+                      90     
+0073 A2E4             91     mov C, Acc.4;
+0075 92E7             92     mov Acc.7, C;
+0077 6570             93     xrl A, 70H;
+                      94     
+0079 A2E7             95     mov C, Acc.7;
+007B 92F5             96     mov B.5, C;
+                      97     
+                      98     
+                      99     ;### making of B6
+                     100     
+007D A2F2            101     mov C, B.2;
+007F 92E5            102     mov Acc.5, C;
+0081 6570            103     xrl A, 70H;
+                     104     
+                     105     
+0083 A2E5            106     mov C, Acc.5;
+0085 92E7            107     mov Acc.7, C;
+0087 6570            108     xrl A, 70H;
+                     109     
+0089 A2E7            110     mov C, Acc.7;
+008B 92F6            111     mov B.6, C;
+                     112     
+                     113     
+008D 537380          114     anl 73H, #80H;
+0090 C2F7            115     clr B.7;
+0092 E5F0            116     mov A, B;
+0094 4273            117     orl 73H, A;
+                     118     
+                     119     
+                     120     
+                     121     
+                     122     ;## for 74H
+                     123     
+A51 MACRO ASSEMBLER  LAB1_2                                                               01/20/2021 14:39:46 PAGE     3
+
+0096 E571            124     mov A, 71H;
+0098 A2E0            125     mov C, Acc.0;
+009A 92F0            126     mov B.0, C;
+009C A2E1            127     mov C, Acc.1;
+009E 92F1            128     mov B.1, C;
+00A0 A2E2            129     mov C, Acc.2;
+00A2 92F2            130     mov B.2, C;
+00A4 A2E3            131     mov C, Acc.3;
+00A6 92F3            132     mov B.3, C;
+                     133     
+                     134     ;### making of B4
+00A8 A2F2            135     mov C, B.2; 
+00AA 92E0            136     mov Acc.0, C;
+00AC 6571            137     xrl A, 71H;
+                     138     
+00AE A2E0            139     mov C, Acc.0;
+00B0 92E3            140     mov Acc.3, C;
+00B2 6571            141     xrl A, 71H;
+                     142     
+00B4 A2E3            143     mov C, Acc.3;
+00B6 92F4            144     mov B.4, C;
+                     145     
+                     146     
+                     147     ;## making of B5
+00B8 A2F1            148     mov C, B.1;
+00BA 92E0            149     mov Acc.0, C;
+00BC 6571            150     xrl A, 71H;
+                     151     
+00BE A2E0            152     mov C, Acc.0;
+00C0 92E3            153     mov Acc.3, C;
+00C2 6571            154     xrl A, 71H;
+                     155     
+00C4 A2E3            156     mov C, Acc.3;
+00C6 92F5            157     mov B.5, C;
+                     158     
+                     159     
+                     160     ;### making of B6
+                     161     
+00C8 A2F2            162     mov C, B.2;
+00CA 92E1            163     mov Acc.1, C;
+00CC 6571            164     xrl A, 71H;
+                     165     
+00CE A2E1            166     mov C, Acc.1;
+00D0 92E3            167     mov Acc.3, C;
+00D2 6571            168     xrl A, 71H;
+                     169     
+00D4 A2E3            170     mov C, Acc.3;
+00D6 92F6            171     mov B.6, C;
+                     172     
+                     173     
+00D8 537480          174     anl 74H, #80H;
+00DB C2F7            175     clr B.7;
+00DD E5F0            176     mov A, B;
+00DF 4274            177     orl 74H, A;
+                     178     
+                     179     
+                     180     
+                     181     ;## for 75H
+                     182     
+                     183     
+                     184     
+                     185     
+                     186     
+00E1 E571            187     mov A, 71H;
+00E3 A2E4            188     mov C, Acc.4
+00E5 92F0            189     mov B.0, C;
+A51 MACRO ASSEMBLER  LAB1_2                                                               01/20/2021 14:39:46 PAGE     4
+
+00E7 A2E5            190     mov C, Acc.5;
+00E9 92F1            191     mov B.1, C;
+00EB A2E6            192     mov C, Acc.6;
+00ED 92F2            193     mov B.2, C;
+00EF A2E7            194     mov C, Acc.7;
+00F1 92F3            195     mov B.3, C;
+                     196     
+                     197     ;### making of B4
+00F3 A2F2            198     mov C, B.2
+00F5 92E4            199     mov Acc.4, C;
+00F7 6571            200     xrl A, 71H;
+                     201     
+00F9 A2E4            202     mov C, Acc.4;
+00FB 92E7            203     mov Acc.7, C;
+00FD 6571            204     xrl A, 71H;
+                     205     
+00FF A2E7            206     mov C, Acc.7;
+0101 92F4            207     mov B.4, C;
+                     208     
+                     209     
+                     210     ;## making of B5
+0103 A2F1            211     mov C, B.1;
+0105 92E4            212     mov Acc.4, C;
+0107 6571            213     xrl A, 71H;
+                     214     
+0109 A2E4            215     mov C, Acc.4;
+010B 92E7            216     mov Acc.7, C;
+010D 6571            217     xrl A, 71H;
+                     218     
+010F A2E7            219     mov C, Acc.7;
+0111 92F5            220     mov B.5, C;
+                     221     
+                     222     
+                     223     ;### making of B6
+                     224     
+0113 A2F2            225     mov C, B.2;
+0115 92E5            226     mov Acc.5, C;
+0117 6571            227     xrl A, 71H;
+                     228     
+0119 A2E5            229     mov C, Acc.5;
+011B 92E7            230     mov Acc.7, C;
+011D 6571            231     xrl A, 71H;
+                     232     
+011F A2E7            233     mov C, Acc.7;
+0121 92F6            234     mov B.6, C;
+                     235     
+                     236     
+0123 537580          237     anl 75H, #80H;
+0126 C2F7            238     clr B.7;
+0128 E5F0            239     mov A, B;
+012A 4275            240     orl 75H, A;
+                     241     
+012C 80FE            242     stop: sjmp stop;
+                     243             
+                     244     end
+A51 MACRO ASSEMBLER  LAB1_2                                                               01/20/2021 14:39:46 PAGE     5
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+STOP . . . . . . .  C ADDR   012CH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

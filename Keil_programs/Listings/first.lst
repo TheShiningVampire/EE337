@@ -1,0 +1,25 @@
+A51 MACRO ASSEMBLER  FIRST                                                                01/19/2021 23:34:04 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\first.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE first.asm SET(SMALL) DEBUG PRINT(.\Listings\first.lst) OBJECT(.\Objects
+                      \first.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+*** WARNING #A41 IN 0 (first.asm, LINE 0): MISSING 'END' STATEMENT
+A51 MACRO ASSEMBLER  FIRST                                                                01/19/2021 23:34:04 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,63 @@
+A51 MACRO ASSEMBLER  BLOCK_MOVING                                                         01/27/2021 15:32:17 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Block_moving.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Block_moving.asm SET(SMALL) DEBUG PRINT(.\Listings\Block_moving.lst) OB
+                      JECT(.\Objects\Block_moving.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000H
+0000 020100            2     ljmp start
+                       3     
+0100                   4     org 100H
+0100 75500A            5             start: MOV 50H,#0AH
+0103 755160            6             MOV 51H,#60H
+0106 755269            7             MOV 52H,#69H
+0109 7405              8             MOV A, #05H
+010B 7960              9             MOV R1,#60H
+010D AE50             10             MOV R6,50H
+010F F7               11             Loop1: MOV @R1, A
+0110 04               12             INC A
+0111 09               13             INC R1
+0112 DEFB             14             DJNZ R6, Loop1
+0114 3150             15             ACALL MEMCPY
+                      16             
+0116 80FE             17             here:SJMP here
+                      18     
+0150                  19     org 150H
+0150 AA50             20             MEMCPY: MOV R2,50H
+0152 A851             21             MOV R0,51H
+0154 A952             22             MOV R1,52H
+0156 E6               23             LOOP: MOV A,@R0
+0157 F5F0             24             MOV B,A
+0159 E7               25             MOV A, @R1
+015A F6               26             MOV @R0, A
+015B E5F0             27             MOV A,B
+015D F7               28             MOV @R1, A
+015E 08               29             INC R0
+015F 09               30             INC R1
+0160 DAF4             31             DJNZ R2, LOOP
+0162 22               32             RET
+                      33     end
+A51 MACRO ASSEMBLER  BLOCK_MOVING                                                         01/27/2021 15:32:17 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+HERE . . . . . . .  C ADDR   0116H   A   
+LOOP . . . . . . .  C ADDR   0156H   A   
+LOOP1. . . . . . .  C ADDR   010FH   A   
+MEMCPY . . . . . .  C ADDR   0150H   A   
+START. . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

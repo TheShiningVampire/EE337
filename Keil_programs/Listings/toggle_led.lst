@@ -1,0 +1,112 @@
+A51 MACRO ASSEMBLER  TOGGLE_LED                                                           02/03/2021 11:37:48 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\toggle_led.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE toggle_led.asm SET(SMALL) DEBUG PRINT(.\Listings\toggle_led.lst) OBJECT
+                      (.\Objects\toggle_led.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000H
+0000 020100            2     ljmp start
+                       3     
+0100                   4     org 100H
+0100 759008            5             start: MOV P1,#08H
+0103 E590              6             MOV A,P1
+0105 540F              7             ANL A,#0FH
+0107 F8                8             MOV R0,A
+0108 28                9             ADD A, R0
+0109 F9               10             MOV R1,A
+010A 29               11             ADD A, R1
+010B FA               12             MOV R2,A
+010C 2A               13             ADD A,R2
+010D FB               14             MOV R3,A
+                      15             
+                      16             
+010E E8               17             A1:MOV A, R0
+010F FD               18             MOV R5,A
+0110 D294             19             SETB P1.4
+0112 710F             20             l1:     ACALL delay_twofifty_ms
+0114 DDFC             21             DJNZ R5, l1
+0116 B294             22             CPL P1.4
+0118 710F             23             ll:ACALL delay_twofifty_ms
+011A DDFC             24             DJNZ R5, ll
+011C 02010E           25             LJMP A1
+                      26             
+                      27                     
+                      28                     
+                      29             
+011F D295             30             l2: SETB P1.5
+0121 710F             31                     ACALL delay_twofifty_ms
+0123 C295             32                     CLR P1.5
+0125 710F             33                     ACALL delay_twofifty_ms
+0127 D9F6             34                     DJNZ R1, l2
+                      35             
+                      36             
+0129 D296             37             l3: SETB P1.6
+012B 710F             38                     ACALL delay_twofifty_ms
+012D C296             39                     CLR P1.6
+012F 710F             40                     ACALL delay_twofifty_ms
+0131 DAF6             41                     DJNZ R2, l3
+                      42                     
+                      43             
+0133 D297             44             l4: SETB P1.7
+0135 710F             45                     ACALL delay_twofifty_ms
+0137 C297             46                     CLR P1.7
+0139 710F             47                     ACALL delay_twofifty_ms
+013B DBD5             48                     DJNZ R3, l1
+                      49                     
+                      50             
+0300                  51     org 300H
+0300                  52             one_milli_delay :
+0300 C007             53             PUSH 07h
+0302 7FFA             54             MOV R7, #250d
+0304                  55             LOOP_1_MILLI : 
+0304 00               56                     NOP ; inserted NOPs to cause delay
+0305 00               57                     NOP ;
+A51 MACRO ASSEMBLER  TOGGLE_LED                                                           02/03/2021 11:37:48 PAGE     2
+
+0306 00               58                     NOP
+0307 00               59                     NOP
+0308 00               60                     NOP
+0309 00               61                     NOP
+030A DFF8             62                     DJNZ R7, LOOP_1_MILLI 
+030C D007             63             POP 07h 
+030E 22               64             RET
+                      65             
+030F                  66             delay_twofifty_ms :
+030F C007             67             push 07h
+0311 7FFA             68             mov R7, #250d
+0313                  69             loop_1 : 
+0313 120300           70                     lcall one_milli_delay;
+0316 DFFB             71                     djnz R7, loop_1;
+0318 D007             72             pop 07h
+031A 22               73             ret
+                      74     end
+A51 MACRO ASSEMBLER  TOGGLE_LED                                                           02/03/2021 11:37:48 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+A1 . . . . . . . .  C ADDR   010EH   A   
+DELAY_TWOFIFTY_MS.  C ADDR   030FH   A   
+L1 . . . . . . . .  C ADDR   0112H   A   
+L2 . . . . . . . .  C ADDR   011FH   A   
+L3 . . . . . . . .  C ADDR   0129H   A   
+L4 . . . . . . . .  C ADDR   0133H   A   
+LL . . . . . . . .  C ADDR   0118H   A   
+LOOP_1 . . . . . .  C ADDR   0313H   A   
+LOOP_1_MILLI . . .  C ADDR   0304H   A   
+ONE_MILLI_DELAY. .  C ADDR   0300H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+START. . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

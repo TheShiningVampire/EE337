@@ -1,0 +1,42 @@
+A51 MACRO ASSEMBLER  SIGNED_ADDITION                                                      01/27/2021 16:11:04 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\signed_addition.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE signed_addition.asm SET(SMALL) DEBUG PRINT(.\Listings\signed_addition.l
+                      st) OBJECT(.\Objects\signed_addition.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000H
+0000 020100            2     ljmp start
+                       3     
+0100                   4     org 100H
+0100 75607F            5             start: MOV 60H, #7FH
+0103 75617F            6             MOV 61H, #7FH
+0106 E560              7             MOV A, 60H
+0108 2561              8             ADD A, 61H
+010A F562              9             MOV 62H,A
+010C C2D5             10             CLR PSW.5
+010E 20D202           11             JB OV,here
+0111 D2D5             12             SETB PSW.5
+0113 80FE             13             here:SJMP here
+                      14     end
+A51 MACRO ASSEMBLER  SIGNED_ADDITION                                                      01/27/2021 16:11:04 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0113H   A   
+OV . . . . . . . .  B ADDR   00D0H.2 A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+START. . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

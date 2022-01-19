@@ -1,0 +1,67 @@
+A51 MACRO ASSEMBLER  BLOCK_COPYING                                                        01/27/2021 16:14:32 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Block_copying.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Block_copying.asm SET(SMALL) DEBUG PRINT(.\Listings\Block_copying.lst) 
+                      OBJECT(.\Objects\Block_copying.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000H
+0000 020100            2     ljmp start
+                       3     
+0100                   4     org 100H
+0100 75500A            5             start: MOV 50H,#0AH
+0103 755160            6             MOV 51H,#60H
+0106 755270            7             MOV 52H,#70H
+0109 7405              8             MOV A, #05H                             ; Adding numbers to the desired location. S
+                             tarting number. 
+010B 7960              9             MOV R1,#60H                             ; Starting memory address
+010D AE50             10             MOV R6,50H                              ; Number of terms
+010F F7               11             Loop1: MOV @R1, A
+0110 04               12             INC A
+0111 09               13             INC R1
+0112 DEFB             14             DJNZ R6, Loop1
+                      15             
+0114 3150             16             ACALL MEMCPY
+                      17             
+0116 80FE             18             here:SJMP here
+                      19     
+0150                  20     org 150H
+0150 AA50             21             MEMCPY: MOV R2,50H              ; Memory copying subroutine                        
+                                          
+0152 E551             22             MOV A, 51H
+0154 2550             23             ADD A, 50H
+0156 14               24             DEC A
+0157 F8               25             MOV R0, A                               ; R0 = M1+N-1
+0158 E552             26             MOV A,52H
+015A 2550             27             ADD A,50H
+015C 14               28             DEC A
+015D F9               29             MOV R1, A                               ; R1 = M2+N-1
+015E E6               30             LOOP: MOV A,@R0                 ; Copy elements
+015F F7               31             MOV @R1, A
+0160 18               32             DEC R0
+0161 19               33             DEC R1
+0162 DAFA             34             DJNZ R2, LOOP
+0164 22               35             RET
+                      36     end
+A51 MACRO ASSEMBLER  BLOCK_COPYING                                                        01/27/2021 16:14:32 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0116H   A   
+LOOP . . . . . . .  C ADDR   015EH   A   
+LOOP1. . . . . . .  C ADDR   010FH   A   
+MEMCPY . . . . . .  C ADDR   0150H   A   
+START. . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,82 @@
+A51 MACRO ASSEMBLER  READ_NIBBLE                                                          02/10/2021 10:30:52 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\read_nibble.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE read_nibble.asm SET(SMALL) DEBUG PRINT(.\Listings\read_nibble.lst) OBJE
+                      CT(.\Objects\read_nibble.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00H
+0000 020100            2     ljmp readnibble
+                       3     
+0100                   4     org 100H
+0100                   5             readnibble: 
+0100 D294              6             SETB P1.4
+0102 D295              7             SETB P1.5
+0104 D296              8             SETB P1.6
+0106 D297              9             SETB P1.7
+0108 7814             10             MOV R0,#20d
+010A 7914             11             MOV R1,#20d
+010C 510F             12             L1: ACALL DELAY
+010E D8FC             13             DJNZ R0, L1
+0110 75F0FF           14             MOV B,#0FFH
+0113 85F090           15             MOV P1,B
+                      16             
+0116 E590             17             MOV A, P1
+0118 540F             18             ANL A,#0FH
+011A F54E             19             MOV 4EH,A
+011C C4               20             SWAP A
+011D F590             21             MOV P1,A        
+011F 510F             22             L2: ACALL DELAY
+0121 D9FC             23             DJNZ R1, L2
+0123 020100           24             LJMP readnibble
+                      25             
+0200                  26     org 200H
+0200                  27             one_milli_delay :  
+0200 C007             28             PUSH 07h
+0202 7FFA             29             MOV R7, #250d
+0204                  30             LOOP_1_MILLI : 
+0204 00               31                     NOP ; NOPs to cause delay
+0205 00               32                     NOP 
+0206 00               33                     NOP
+0207 00               34                     NOP
+0208 00               35                     NOP
+0209 00               36                     NOP
+020A DFF8             37                     DJNZ R7, LOOP_1_MILLI 
+020C D007             38             POP 07h 
+020E 22               39             RET
+                      40             
+020F                  41             DELAY :  
+020F C007             42             PUSH 07h
+0211 7FFA             43             MOV R7, #250d
+0213                  44             loop_1 : 
+0213 120200           45                     LCALL one_milli_delay;
+0216 DFFB             46                     DJNZ R7, loop_1;
+0218 D007             47             POP 07h
+021A 22               48             RET
+                      49     END
+A51 MACRO ASSEMBLER  READ_NIBBLE                                                          02/10/2021 10:30:52 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+DELAY. . . . . . .  C ADDR   020FH   A   
+L1 . . . . . . . .  C ADDR   010CH   A   
+L2 . . . . . . . .  C ADDR   011FH   A   
+LOOP_1 . . . . . .  C ADDR   0213H   A   
+LOOP_1_MILLI . . .  C ADDR   0204H   A   
+ONE_MILLI_DELAY. .  C ADDR   0200H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+READNIBBLE . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

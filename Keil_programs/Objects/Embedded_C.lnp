@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\Tennis_scoreboard_final.obj" 
+TO ".\Objects\Embedded_C" 
+PRINT(".\Listings\Embedded_C.m51") RAMSIZE(256) 

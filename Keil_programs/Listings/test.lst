@@ -1,0 +1,91 @@
+C51 COMPILER V9.60.0.0   TEST                                                              03/09/2021 20:44:37 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE TEST
+OBJECT MODULE PLACED IN .\Objects\test.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE test.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\test
+                    -.lst) TABS(2) OBJECT(.\Objects\test.obj)
+
+line level    source
+
+   1          #include <at89c5131.h>
+   2          #include <stdio.h>
+   3          
+   4          //Bit definitions
+   5          sbit RS=P0^0;
+   6          sbit RW=0x81; //Also can use P0^1 or 0x80^1
+   7          sbit EN=P0^2;
+   8          
+   9          void msdelay(unsigned int time)
+  10          {
+  11   1        int i,j;  
+  12   1        for(i = 0 ; i < time ; i++)
+  13   1        {
+  14   2          for(j = 0; j<318 ; j++)
+  15   2          {}
+  16   2        } 
+  17   1      }
+  18          
+  19          void lcd_cmd(unsigned int i)
+  20          {
+  21   1        RS=0;
+  22   1        RW=0;
+  23   1        EN=1;
+  24   1        P2=i;
+  25   1        msdelay(10);
+  26   1        EN=0;
+  27   1      }
+  28          void lcd_char(unsigned char ch)
+  29          {
+  30   1        RS=1;
+  31   1        RW=0;
+  32   1        EN=1;
+  33   1        P2=ch;
+  34   1        msdelay(10);
+  35   1        EN=0;
+  36   1      }
+  37          void lcd_write_string(unsigned char *s)
+  38          {
+  39   1        while(*s!='\0')   //Can use while(*s)
+  40   1        {
+  41   2          lcd_char(*s++);
+  42   2        }
+  43   1      }
+  44          void lcd_init(void) using 3
+  45          {
+  46   1        lcd_cmd(0x38);
+  47   1        msdelay(4);
+  48   1        lcd_cmd(0x06);
+  49   1        msdelay(4);
+  50   1        lcd_cmd(0x0C);
+  51   1        msdelay(4);
+  52   1        lcd_cmd(0x01);
+  53   1        msdelay(4);
+  54   1      }
+C51 COMPILER V9.60.0.0   TEST                                                              03/09/2021 20:44:37 PAGE 2   
+
+  55          
+  56          void main()
+  57          { 
+  58   1        unsigned char mystring[] = "Vinit is pro";
+  59   1        lcd_init();
+  60   1        lcd_cmd(0x80);
+  61   1        lcd_write_string(mystring);
+  62   1        while(1)
+  63   1        {
+  64   2        } 
+  65   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    182    ----
+   CONSTANT SIZE    =     13    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      16
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

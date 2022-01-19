@@ -1,0 +1,397 @@
+A51 MACRO ASSEMBLER  HAMMING_CODE                                                         01/20/2021 13:54:42 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Hamming_code.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Hamming_code.asm SET(SMALL) DEBUG PRINT(.\Listings\Hamming_code.lst) OB
+                      JECT(.\Objects\Hamming_code.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     Org 0h
+0000 020100            2     ljmp main; jump to label "main"
+0100                   3     Org 100h
+0100                   4     main:
+0100 757085            5             MOV 70H,#85H    ;Loading value 20h in memory location 70h
+0103 757159            6             MOV 71H,#59H    ;Loading value 21h in memory location 71h
+                       7             
+                       8             
+                       9             
+0106 E570             10             MOV A, 70H;
+0108 540F             11             ANL A, #0FH;
+010A F520             12             MOV 20H, A;
+                      13             
+                      14             
+                      15             
+010C A200             16             MOV C, 20H.0;
+010E B202             17             CPL 20H.2
+0110 8202             18             ANL C, 20H.2;
+0112 B202             19             CPL 20H.2
+0114 9208             20             MOV 21H.0, C;
+0116 A200             21             MOV C, 20H.0;
+0118 B3               22             CPL C;
+0119 8202             23             ANL C,20H.2;
+011B 7208             24             ORL C,21H.0;
+011D 9208             25             MOV 21H.0, C; Moving b0 XOR b2 in 21H.0
+                      26             
+                      27             
+011F A208             28             MOV C, 21H.0;
+0121 B203             29             CPL 20H.3
+0123 8203             30             ANL C, 20H.3;
+0125 B203             31             CPL 20H.3
+0127 9209             32             MOV 21H.1, C;
+0129 A208             33             MOV C, 21H.0;
+012B B3               34             CPL C;
+012C 8203             35             ANL C,20H.3;
+012E 7209             36             ORL C,21H.1;
+0130 9204             37             MOV 20H.4, C; Moving b0 XOR b2 XOR b3 in 20H.4
+                      38             
+                      39             
+                      40             
+0132 A200             41             MOV C, 20H.0;
+0134 B201             42             CPL 20H.1
+0136 8201             43             ANL C,20H.1;
+0138 B201             44             CPL 20H.1
+013A 9208             45             MOV 21H.0, C;
+013C A200             46             MOV C, 20H.0;
+013E B3               47             CPL C;
+013F 8201             48             ANL C,20H.1;
+0141 7208             49             ORL C,21H.0;
+0143 9208             50             MOV 21H.0, C; Moving b0 XOR b2 in 21H.0
+                      51             
+                      52             
+0145 A208             53             MOV C, 21H.0;
+0147 B203             54             CPL 20H.3
+0149 8203             55             ANL C, 20H.3;
+014B B203             56             CPL 20H.3
+014D 9209             57             MOV 21H.1, C;
+A51 MACRO ASSEMBLER  HAMMING_CODE                                                         01/20/2021 13:54:42 PAGE     2
+
+014F A208             58             MOV C, 21H.0;
+0151 B3               59             CPL C;
+0152 8203             60             ANL C,20H.3;
+0154 7209             61             ORL C,21H.1;
+0156 9205             62             MOV 20H.5, C; Moving b0 XOR b2 XOR b3 in 20H.5
+                      63             
+                      64             
+                      65             
+0158 A201             66             MOV C, 20H.1;
+015A B202             67             CPL 20H.2
+015C 8202             68             ANL C, 20H.2;
+015E B202             69             CPL 20H.2
+0160 9208             70             MOV 21H.0, C;
+0162 A201             71             MOV C, 20H.1;
+0164 B3               72             CPL C;
+0165 8202             73             ANL C,20H.2;
+0167 7208             74             ORL C,21H.0;
+0169 9208             75             MOV 21H.0, C; Moving b0 XOR b2 in 21H.0
+                      76     
+                      77             
+016B A208             78             MOV C, 21H.0;
+016D B203             79             CPL 20H.3
+016F 8203             80             ANL C, 20H.3;
+0171 B203             81             CPL 20H.3
+0173 9209             82             MOV 21H.1, C;
+0175 A208             83             MOV C, 21H.0;
+0177 B3               84             CPL C;
+0178 8203             85             ANL C,20H.3;
+017A 7209             86             ORL C,21H.1;
+017C 9206             87             MOV 20H.6, C; Moving b0 XOR b2 XOR b3 in 20H.5
+                      88             
+                      89             
+017E E520             90             MOV A,20H;
+0180 F572             91             MOV 72H, A;
+                      92             
+                      93             
+                      94             
+0182 E570             95             MOV A, 70H;
+0184 54F0             96             ANL A, #0F0H;
+0186 03               97             RR A
+0187 03               98             RR A
+0188 03               99             RR A
+0189 03              100             RR A
+018A F520            101             MOV 20H, A;
+                     102             
+                     103             
+018C A200            104             MOV C, 20H.0;
+018E B202            105             CPL 20H.2
+0190 8202            106             ANL C, 20H.2;
+0192 B202            107             CPL 20H.2
+0194 9208            108             MOV 21H.0, C;
+0196 A200            109             MOV C, 20H.0;
+0198 B3              110             CPL C;
+0199 8202            111             ANL C,20H.2;
+019B 7208            112             ORL C,21H.0;
+019D 9208            113             MOV 21H.0, C; Moving b0 XOR b2 in 21H.0
+                     114             
+                     115             
+019F A208            116             MOV C, 21H.0;
+01A1 B203            117             CPL 20H.3
+01A3 8203            118             ANL C, 20H.3;
+01A5 B203            119             CPL 20H.3
+01A7 9209            120             MOV 21H.1, C;
+01A9 A208            121             MOV C, 21H.0;
+01AB B3              122             CPL C;
+01AC 8203            123             ANL C,20H.3;
+A51 MACRO ASSEMBLER  HAMMING_CODE                                                         01/20/2021 13:54:42 PAGE     3
+
+01AE 7209            124             ORL C,21H.1;
+01B0 9204            125             MOV 20H.4, C; Moving b0 XOR b2 XOR b3 in 20H.4
+                     126             
+                     127             
+                     128             
+01B2 A200            129             MOV C, 20H.0;
+01B4 B201            130             CPL 20H.1
+01B6 8201            131             ANL C,20H.1;
+01B8 B201            132             CPL 20H.1
+01BA 9208            133             MOV 21H.0, C;
+01BC A200            134             MOV C, 20H.0;
+01BE B3              135             CPL C;
+01BF 8201            136             ANL C,20H.1;
+01C1 7208            137             ORL C,21H.0;
+01C3 9208            138             MOV 21H.0, C; Moving b0 XOR b2 in 21H.0
+                     139             
+                     140             
+01C5 A208            141             MOV C, 21H.0;
+01C7 B203            142             CPL 20H.3
+01C9 8203            143             ANL C, 20H.3;
+01CB B203            144             CPL 20H.3
+01CD 9209            145             MOV 21H.1, C;
+01CF A208            146             MOV C, 21H.0;
+01D1 B3              147             CPL C;
+01D2 8203            148             ANL C,20H.3;
+01D4 7209            149             ORL C,21H.1;
+01D6 9205            150             MOV 20H.5, C; Moving b0 XOR b2 XOR b3 in 20H.5
+                     151             
+                     152             
+                     153             
+01D8 A201            154             MOV C, 20H.1;
+01DA B202            155             CPL 20H.2
+01DC 8202            156             ANL C, 20H.2;
+01DE B202            157             CPL 20H.2
+01E0 9208            158             MOV 21H.0, C;
+01E2 A201            159             MOV C, 20H.1;
+01E4 B3              160             CPL C;
+01E5 8202            161             ANL C,20H.2;
+01E7 7208            162             ORL C,21H.0;
+01E9 9208            163             MOV 21H.0, C; Moving b0 XOR b2 in 21H.0
+                     164     
+                     165             
+01EB A208            166             MOV C, 21H.0;
+01ED B203            167             CPL 20H.3
+01EF 8203            168             ANL C, 20H.3;
+01F1 B203            169             CPL 20H.3
+01F3 9209            170             MOV 21H.1, C;
+01F5 A208            171             MOV C, 21H.0;
+01F7 B3              172             CPL C;
+01F8 8203            173             ANL C,20H.3;
+01FA 7209            174             ORL C,21H.1;
+01FC 9206            175             MOV 20H.6, C; Moving b0 XOR b2 XOR b3 in 20H.6
+                     176             
+                     177                             
+                     178             
+01FE E520            179             MOV A,20H;
+0200 F573            180             MOV 73H, A;
+                     181             
+                     182             
+                     183             
+0202 E571            184             MOV A, 71H;
+0204 540F            185             ANL A, #00FH;
+0206 F520            186             MOV 20H, A;
+                     187             
+                     188             
+                     189             
+A51 MACRO ASSEMBLER  HAMMING_CODE                                                         01/20/2021 13:54:42 PAGE     4
+
+0208 A200            190             MOV C, 20H.0;
+020A B202            191             CPL 20H.2
+020C 8202            192             ANL C, 20H.2;
+020E B202            193             CPL 20H.2
+0210 9208            194             MOV 21H.0, C;
+0212 A200            195             MOV C, 20H.0;
+0214 B3              196             CPL C;
+0215 8202            197             ANL C,20H.2;
+0217 7208            198             ORL C,21H.0;
+0219 9208            199             MOV 21H.0, C; Moving b0 XOR b2 in 21H.0
+                     200             
+                     201             
+021B A208            202             MOV C, 21H.0;
+021D B203            203             CPL 20H.3
+021F 8203            204             ANL C, 20H.3;
+0221 B203            205             CPL 20H.3
+0223 9209            206             MOV 21H.1, C;
+0225 A208            207             MOV C, 21H.0;
+0227 B3              208             CPL C;
+0228 8203            209             ANL C,20H.3;
+022A 7209            210             ORL C,21H.1;
+022C 9204            211             MOV 20H.4, C; Moving b0 XOR b2 XOR b3 in 20H.4
+                     212             
+                     213             
+                     214             
+022E A200            215             MOV C, 20H.0;
+0230 B201            216             CPL 20H.1
+0232 8201            217             ANL C,20H.1;
+0234 B201            218             CPL 20H.1
+0236 9208            219             MOV 21H.0, C;
+0238 A200            220             MOV C, 20H.0;
+023A B3              221             CPL C;
+023B 8201            222             ANL C,20H.1;
+023D 7208            223             ORL C,21H.0;
+023F 9208            224             MOV 21H.0, C; Moving b0 XOR b2 in 21H.0
+                     225             
+                     226             
+0241 A208            227             MOV C, 21H.0;
+0243 B203            228             CPL 20H.3
+0245 8203            229             ANL C, 20H.3;
+0247 B203            230             CPL 20H.3
+0249 9209            231             MOV 21H.1, C;
+024B A208            232             MOV C, 21H.0;
+024D B3              233             CPL C;
+024E 8203            234             ANL C,20H.3;
+0250 7209            235             ORL C,21H.1;
+0252 9205            236             MOV 20H.5, C; Moving b0 XOR b2 XOR b3 in 20H.5
+                     237             
+                     238             
+                     239             
+0254 A201            240             MOV C, 20H.1;
+0256 B202            241             CPL 20H.2
+0258 8202            242             ANL C, 20H.2;
+025A B202            243             CPL 20H.2
+025C 9208            244             MOV 21H.0, C;
+025E A201            245             MOV C, 20H.1;
+0260 B3              246             CPL C;
+0261 8202            247             ANL C,20H.2;
+0263 7208            248             ORL C,21H.0;
+0265 9208            249             MOV 21H.0, C; Moving b0 XOR b2 in 21H.0
+                     250     
+                     251             
+0267 A208            252             MOV C, 21H.0;
+0269 B203            253             CPL 20H.3
+026B 8203            254             ANL C, 20H.3;
+026D B203            255             CPL 20H.3
+A51 MACRO ASSEMBLER  HAMMING_CODE                                                         01/20/2021 13:54:42 PAGE     5
+
+026F 9209            256             MOV 21H.1, C;
+0271 A208            257             MOV C, 21H.0;
+0273 B3              258             CPL C;
+0274 8203            259             ANL C,20H.3;
+0276 7209            260             ORL C,21H.1;
+0278 9206            261             MOV 20H.6, C; Moving b0 XOR b2 XOR b3 in 20H.6
+                     262             
+                     263             
+027A E520            264             MOV A,20H;
+027C F574            265             MOV 74H, A;
+                     266             
+                     267             
+                     268     
+                     269             
+027E E571            270             MOV A, 71H;
+0280 54F0            271             ANL A,#0F0H;
+0282 03              272             RR A
+0283 03              273             RR A
+0284 03              274             RR A
+0285 03              275             RR A
+0286 F520            276             MOV 20H, A;
+                     277             
+                     278     
+                     279             
+0288 A200            280             MOV C, 20H.0;
+028A B202            281             CPL 20H.2
+028C 8202            282             ANL C, 20H.2;
+028E B202            283             CPL 20H.2
+0290 9208            284             MOV 21H.0, C;
+0292 A200            285             MOV C, 20H.0;
+0294 B3              286             CPL C;
+0295 8202            287             ANL C,20H.2;
+0297 7208            288             ORL C,21H.0;
+0299 9208            289             MOV 21H.0, C; Moving b0 XOR b2 in 21H.0
+                     290             
+                     291             
+029B A208            292             MOV C, 21H.0;
+029D B203            293             CPL 20H.3
+029F 8203            294             ANL C, 20H.3;
+02A1 B203            295             CPL 20H.3
+02A3 9209            296             MOV 21H.1, C;
+02A5 A208            297             MOV C, 21H.0;
+02A7 B3              298             CPL C;
+02A8 8203            299             ANL C,20H.3;
+02AA 7209            300             ORL C,21H.1;
+02AC 9204            301             MOV 20H.4, C; Moving b0 XOR b2 XOR b3 in 20H.4
+                     302             
+                     303             
+                     304             
+02AE A200            305             MOV C, 20H.0;
+02B0 B201            306             CPL 20H.1
+02B2 8201            307             ANL C,20H.1;
+02B4 B201            308             CPL 20H.1
+02B6 9208            309             MOV 21H.0, C;
+02B8 A200            310             MOV C, 20H.0;
+02BA B3              311             CPL C;
+02BB 8201            312             ANL C,20H.1;
+02BD 7208            313             ORL C,21H.0;
+02BF 9208            314             MOV 21H.0, C; Moving b0 XOR b2 in 21H.0
+                     315             
+                     316             
+02C1 A208            317             MOV C, 21H.0;
+02C3 B203            318             CPL 20H.3
+02C5 8203            319             ANL C, 20H.3;
+02C7 B203            320             CPL 20H.3
+02C9 9209            321             MOV 21H.1, C;
+A51 MACRO ASSEMBLER  HAMMING_CODE                                                         01/20/2021 13:54:42 PAGE     6
+
+02CB A208            322             MOV C, 21H.0;
+02CD B3              323             CPL C;
+02CE 8203            324             ANL C,20H.3;
+02D0 7209            325             ORL C,21H.1;
+02D2 9205            326             MOV 20H.5, C; Moving b0 XOR b2 XOR b3 in 20H.5
+                     327             
+                     328             
+                     329             
+02D4 A201            330             MOV C, 20H.1;
+02D6 B202            331             CPL 20H.2
+02D8 8202            332             ANL C, 20H.2;
+02DA B202            333             CPL 20H.2
+02DC 9208            334             MOV 21H.0, C;
+02DE A201            335             MOV C, 20H.1;
+02E0 B3              336             CPL C;
+02E1 8202            337             ANL C,20H.2;
+02E3 7208            338             ORL C,21H.0;
+02E5 9208            339             MOV 21H.0, C; Moving b0 XOR b2 in 21H.0
+                     340     
+                     341             
+02E7 A208            342             MOV C, 21H.0;
+02E9 B203            343             CPL 20H.3
+02EB 8203            344             ANL C, 20H.3;
+02ED B203            345             CPL 20H.3
+02EF 9209            346             MOV 21H.1, C;
+02F1 A208            347             MOV C, 21H.0;
+02F3 B3              348             CPL C;
+02F4 8203            349             ANL C,20H.3;
+02F6 7209            350             ORL C,21H.1;
+02F8 9206            351             MOV 20H.6, C; Moving b0 XOR b2 XOR b3 in 20H.6  
+                     352             
+02FA E520            353             MOV A,20H;
+02FC F575            354             MOV 75H, A;
+                     355             
+                     356             
+                     357             
+                     358             
+                     359             
+02FE 80FE            360     HERE:SJMP HERE          
+                     361     END
+A51 MACRO ASSEMBLER  HAMMING_CODE                                                         01/20/2021 13:54:42 PAGE     7
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   02FEH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

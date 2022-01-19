@@ -1,0 +1,381 @@
+C51 COMPILER V9.60.0.0   TENNIS_SCOREBOARD_MODIFICATION                                    04/07/2021 13:52:56 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE TENNIS_SCOREBOARD_MODIFICATION
+OBJECT MODULE PLACED IN .\Objects\Tennis_scoreboard_modification.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Uart\Tennis_scoreboard_modification.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJ
+                    -ECTEXTEND PRINT(.\Listings\Tennis_scoreboard_modification.lst) TABS(2) OBJECT(.\Objects\Tennis_scoreboard_modification.o
+                    -bj)
+
+line level    source
+
+   1          #include <at89c5131.h>
+   2          #include <stdio.h>
+   3          #include "lcd.h"    //Header file with LCD interfacing functions
+   4          #include "serial.c" //C file with UART interfacing functions
+   5          
+   6          unsigned int s1;                  // Sets won by player 1
+   7          unsigned int s2;                  // Sets won by player 2
+   8          unsigned int g1;                  // Games won by player 1 in the current set
+   9          unsigned int g2;                  // Games won by player 2 in the current set 
+  10          unsigned int p1;                  // Score of player 1
+  11          unsigned int p2;                  // Score of player 2
+  12          
+  13          //Functions used in this program
+  14          void initialise_score(void);      // intialises the score, games and set points
+  15          void game_update(void);           // updates the game points on the LCD
+  16          bit score_update(void);           // updates the score points on the LCD and returns if a game is completed
+  17          void set_update(void);            // Updates the set on the LCD
+  18          void setbreaker(void);            // In case of a tie-breaker the function is called, 
+  19                                            // which updates score according to the rules of the tie-breaker
+  20          
+  21          void initialise_score()
+  22          {
+  23   1        
+  24   1        // All the values are intialised to 0
+  25   1        p1 = 0;   
+  26   1        p2 = 0;
+  27   1        g1 = 0;
+  28   1        g2 = 0;
+  29   1        s1 = 0;
+  30   1        s2 = 0;
+  31   1      }
+  32          
+  33          void game_update()
+  34          {
+  35   1        unsigned char game1[1] , game2[1];
+  36   1      
+  37   1        sprintf(game1 , "%d" , g1);
+  38   1        sprintf(game2 , "%d" , g2);
+  39   1        
+  40   1        
+  41   1        if(s1+s2 == 0)            // If none of the sets is completed
+  42   1        {
+  43   2          lcd_cmd(0x85);    
+  44   2          lcd_write_string(game1);
+  45   2          lcd_cmd(0x86);
+  46   2          lcd_write_string("-");
+  47   2          lcd_cmd(0x87);
+  48   2          lcd_write_string(game2);    
+  49   2        }
+  50   1        if(s1+s2 == 1)            // If one set is completed
+  51   1        {
+  52   2          lcd_cmd(0x89);    
+  53   2          lcd_write_string(game1);
+C51 COMPILER V9.60.0.0   TENNIS_SCOREBOARD_MODIFICATION                                    04/07/2021 13:52:56 PAGE 2   
+
+  54   2          lcd_cmd(0x8A);
+  55   2          lcd_write_string("-");
+  56   2          lcd_cmd(0x8B);
+  57   2          lcd_write_string(game2);    
+  58   2        }
+  59   1        if(s1+s2 == 2)            // If 2 sets are completed 
+  60   1        {
+  61   2          lcd_cmd(0x8D);    
+  62   2          lcd_write_string(game1);
+  63   2          lcd_cmd(0x8E);
+  64   2          lcd_write_string("-");
+  65   2          lcd_cmd(0x8F);
+  66   2          lcd_write_string(game2);    
+  67   2        } 
+  68   1      }
+  69          
+  70          bit score_update()
+  71          {
+  72   1          bit game_done = 0;              // game_done captures whether the game is completed or not
+  73   1          lcd_cmd(0xC7);
+  74   1          if(p1>=4 || p2>=4)              // if score is greater than 40, then the conditions for deuce need to be check
+             -ed 
+  75   1          { 
+  76   2            if(p1 == 4 && p2<=2)          // If player 1 has score 40
+  77   2            {
+  78   3              g1++;
+  79   3              lcd_write_string("00-00");
+  80   3              game_update();
+  81   3              game_done = 1;
+  82   3            }
+  83   2            
+  84   2            if(p2 == 4 && p1<=2)
+  85   2            {
+  86   3              g2++;
+  87   3              lcd_write_string("00-00");
+  88   3              game_update();
+  89   3              game_done = 1;
+  90   3            }
+  91   2            
+  92   2            else
+  93   2            {
+  94   3              if(p1>p2)
+  95   3              {
+  96   4                if( p1 - p2 == 1)
+  97   4                {
+  98   5                  lcd_write_string("Ad-40");
+  99   5                }
+ 100   4                if( p1 - p2 == 2)
+ 101   4                {
+ 102   5                  g1++;
+ 103   5                  lcd_write_string("00-00");
+ 104   5                  game_update();
+ 105   5                  game_done = 1;            
+ 106   5                }
+ 107   4              }
+ 108   3              else if(p2>p1)
+ 109   3              {
+ 110   4                if( p2 - p1 == 1)
+ 111   4                {
+ 112   5                  lcd_write_string("40-Ad");
+ 113   5                }
+ 114   4                if( p2 - p1 == 2)
+C51 COMPILER V9.60.0.0   TENNIS_SCOREBOARD_MODIFICATION                                    04/07/2021 13:52:56 PAGE 3   
+
+ 115   4                {
+ 116   5                  g2++;
+ 117   5                  lcd_write_string("00-00");
+ 118   5                  game_update();
+ 119   5                  game_done = 1;            
+ 120   5                }
+ 121   4              }
+ 122   3              else
+ 123   3              {
+ 124   4                lcd_write_string("40-40");
+ 125   4              }
+ 126   3              
+ 127   3            }
+ 128   2            
+ 129   2            
+ 130   2          }
+ 131   1          
+ 132   1          else
+ 133   1          {
+ 134   2            if(p1 == 0)
+ 135   2            {
+ 136   3              lcd_write_string("00");
+ 137   3            }
+ 138   2            if(p1 == 1)
+ 139   2            {
+ 140   3              lcd_write_string("15");
+ 141   3            }
+ 142   2            if(p1 == 2)
+ 143   2            {
+ 144   3              lcd_write_string("30");
+ 145   3            }
+ 146   2            if(p1 == 3)
+ 147   2            {
+ 148   3              lcd_write_string("40");
+ 149   3            }
+ 150   2            
+ 151   2            lcd_cmd(0xC9);
+ 152   2            lcd_write_string("-");
+ 153   2            lcd_cmd(0xCA);
+ 154   2            if(p2 == 0)
+ 155   2            {
+ 156   3              lcd_write_string("00");
+ 157   3            }
+ 158   2            if(p2 == 1)
+ 159   2            {
+ 160   3              lcd_write_string("15");
+ 161   3            }
+ 162   2            if(p2 == 2)
+ 163   2            {
+ 164   3              lcd_write_string("30");
+ 165   3            }
+ 166   2            if(p2 == 3)
+ 167   2            {
+ 168   3              lcd_write_string("40");
+ 169   3            }     
+ 170   2          } 
+ 171   1        
+ 172   1        return game_done;
+ 173   1      }
+ 174          
+ 175          void set_update()
+ 176          {
+C51 COMPILER V9.60.0.0   TENNIS_SCOREBOARD_MODIFICATION                                    04/07/2021 13:52:56 PAGE 4   
+
+ 177   1            if(g1 >=6 || g2>=6)
+ 178   1              {
+ 179   2                if( (g1==6 && g2<=4) || (g1 == 7))
+ 180   2                {
+ 181   3                  g1 = 0;
+ 182   3                  g2 = 0;
+ 183   3                  s1++;
+ 184   3                }
+ 185   2                
+ 186   2                if((g2==6 && g1<=4) ||(g2 == 7))
+ 187   2                {
+ 188   3                  g1 = 0;
+ 189   3                  g2 = 0;
+ 190   3                  s2++;
+ 191   3                }
+ 192   2                
+ 193   2                if(s1 == 2)
+ 194   2                {
+ 195   3                  lcd_cmd(0x01);
+ 196   3                  lcd_cmd(0x81);
+ 197   3                  lcd_write_string("Player 1 Wins");
+ 198   3                }
+ 199   2                
+ 200   2                
+ 201   2                else if(s2 == 2)
+ 202   2                {
+ 203   3                  lcd_cmd(0x01);
+ 204   3                  lcd_cmd(0x81);
+ 205   3                  lcd_write_string("Player 2 Wins");
+ 206   3                }
+ 207   2                
+ 208   2                else
+ 209   2                {
+ 210   3                  game_update();
+ 211   3                }
+ 212   2                          
+ 213   2                if(g1 == 6 && g2 == 6)
+ 214   2                {
+ 215   3                  setbreaker();
+ 216   3                }       
+ 217   2              } 
+ 218   1      }
+ 219          
+ 220          void setbreaker()
+ 221          {
+ 222   1        bit done = 0;   
+ 223   1        unsigned char ch=0;
+ 224   1        unsigned char scores[5];
+ 225   1        while(!done)
+ 226   1        {
+ 227   2          //Receive a character
+ 228   2            ch = receive_char();
+ 229   2          
+ 230   2          //Displays the string on the terminal software
+ 231   2            switch(ch)
+ 232   2            {
+ 233   3              case '1': p1++;
+ 234   3                  break;
+ 235   3              
+ 236   3              case '2': p2++;
+ 237   3                   break;
+ 238   3                    
+C51 COMPILER V9.60.0.0   TENNIS_SCOREBOARD_MODIFICATION                                    04/07/2021 13:52:56 PAGE 5   
+
+ 239   3              default:transmit_string("Incorrect test. Pass correct number\r\n");
+ 240   3                   break;
+ 241   3              
+ 242   3            }
+ 243   2            
+ 244   2            sprintf(scores,"%02d-%02d",p1,p2);
+ 245   2            
+ 246   2            lcd_cmd(0xC7);
+ 247   2            lcd_write_string(scores);
+ 248   2            
+ 249   2            if(p1>=7 || p2>=7)
+ 250   2            {
+ 251   3              if(p1> p2)
+ 252   3              {
+ 253   4                if(p1 - p2 >=2)
+ 254   4                {
+ 255   5                  done = 1;
+ 256   5                  g1++;
+ 257   5                  game_update();
+ 258   5                }
+ 259   4              }
+ 260   3              
+ 261   3              if(p2> p1)
+ 262   3              {
+ 263   4                if(p2 - p1 >=2)
+ 264   4                {
+ 265   5                  done = 1;
+ 266   5                  g2++;
+ 267   5                  game_update();
+ 268   5                }
+ 269   4              } 
+ 270   3            }
+ 271   2        }
+ 272   1        
+ 273   1        p1 = 0;
+ 274   1        p2 = 0;
+ 275   1        score_update();
+ 276   1        game_update();
+ 277   1        set_update();
+ 278   1      }
+ 279          
+ 280          //Main function
+ 281          void main(void)
+ 282          {
+ 283   1        unsigned char ch=0;
+ 284   1        bit game;
+ 285   1        
+ 286   1        //Call initialization functions
+ 287   1        lcd_init();
+ 288   1        uart_init();
+ 289   1      
+ 290   1        //These strings will be printed in terminal software
+ 291   1        transmit_string("************************\r\n");
+ 292   1        transmit_string("******TENNIS MATCH******\r\n");
+ 293   1        transmit_string("************************\r\n");
+ 294   1        transmit_string("Press 1 if Player 1 wins the point\r\n");
+ 295   1        transmit_string("Press 2 if Player 2 wins the point\r\n");
+ 296   1      
+ 297   1        
+ 298   1        while(1)
+ 299   1        {
+ 300   2          
+C51 COMPILER V9.60.0.0   TENNIS_SCOREBOARD_MODIFICATION                                    04/07/2021 13:52:56 PAGE 6   
+
+ 301   2          initialise_score();
+ 302   2          lcd_cmd(0x01);
+ 303   2          lcd_cmd(0x82);
+ 304   2          lcd_write_string("TENNIS MATCH");
+ 305   2          
+ 306   2          msdelay(500);
+ 307   2          lcd_cmd(0x01);
+ 308   2          lcd_cmd(0x80);
+ 309   2          lcd_write_string("GAME");
+ 310   2          lcd_cmd(0xC0);
+ 311   2          lcd_write_string("SCORE");
+ 312   2          
+ 313   2          score_update();
+ 314   2          game_update();
+ 315   2          
+ 316   2          while(s1<2 && s2<2)
+ 317   2          {   
+ 318   3              //Receive a character
+ 319   3              ch = receive_char();
+ 320   3              //Decide which test function to run based on character sent
+ 321   3              //Displays the string on the terminal software
+ 322   3              switch(ch)
+ 323   3              {
+ 324   4                case '1': p1++; 
+ 325   4                    break;
+ 326   4                
+ 327   4                case '2': p2++;
+ 328   4                    break;
+ 329   4                      
+ 330   4                default:transmit_string("Incorrect test. Pass correct number\r\n");
+ 331   4                    break;
+ 332   4                
+ 333   4              }
+ 334   3                
+ 335   3              game  = score_update();
+ 336   3              if(game == 1)
+ 337   3              {
+ 338   4                p1 = 0;
+ 339   4                p2 = 0;       
+ 340   4                set_update();
+ 341   4              }
+ 342   3          }
+ 343   2          msdelay(5000);    
+ 344   2        }
+ 345   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1561    ----
+   CONSTANT SIZE    =    269    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     12      18
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2       3
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

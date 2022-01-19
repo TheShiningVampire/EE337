@@ -1,0 +1,105 @@
+C51 COMPILER V9.60.0.0   SA_RE                                                             03/10/2021 13:36:25 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE SA_RE
+OBJECT MODULE PLACED IN .\Objects\Sa_Re.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Sa_Re.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\Sa_
+                    -Re.lst) TABS(2) OBJECT(.\Objects\Sa_Re.obj)
+
+line level    source
+
+   1          #include <at89c5131.h>
+   2          #include <stdio.h>
+   3          
+   4          sbit sound = P0^0;
+   5          
+   6          void main()
+   7          {
+   8   1        unsigned int i, j;
+   9   1        unsigned int counter = 80;
+  10   1        sound = 0;
+  11   1        
+  12   1        while(1)
+  13   1        {
+  14   2            counter = 80;
+  15   2            TMOD = 0x11;            // Timer 1 in mode 1
+  16   2            TL1 = 0xB0;
+  17   2            TH1 = 0x3C;
+  18   2            TR1 = 1;
+  19   2            while(1)
+  20   2            {
+  21   3              TL0 = 0x0B9;
+  22   3              TH0 = 0x0EF;
+  23   3              TR0 = 1;
+  24   3              while(TF0 == 0)
+  25   3              {
+  26   4              }
+  27   3              TR0 = 0;
+  28   3              TF0 = 0;
+  29   3              sound = ~sound;
+  30   3              
+  31   3              if(TF1 == 1)
+  32   3              {
+  33   4                TF1 = 0;
+  34   4                counter--;
+  35   4                TL1 = 0xB0;
+  36   4                TH1 = 0x3C;
+  37   4                if (counter==0)
+  38   4                {
+  39   5                  TR1 = 0;
+  40   5                  break;
+  41   5                }
+  42   4                
+  43   4              }
+  44   3            }
+  45   2          
+  46   2            counter = 80;
+  47   2            TMOD = 0x11;            // Timer 0 and 1 in mode 1
+  48   2            TL1 = 0xB0;
+  49   2            TH1 = 0x3C;
+  50   2            TR1 = 1;
+  51   2            while(1)
+  52   2            {
+  53   3              TL0 = 0x088;
+  54   3              TH0 = 0x0F1;
+C51 COMPILER V9.60.0.0   SA_RE                                                             03/10/2021 13:36:25 PAGE 2   
+
+  55   3              TR0 = 1;
+  56   3              while(TF0 == 0)
+  57   3              {
+  58   4              }
+  59   3              TR0 = 0;
+  60   3              TF0 = 0;
+  61   3              sound = ~sound;
+  62   3              
+  63   3              if(TF1 == 1)
+  64   3              {
+  65   4                TF1 = 0;
+  66   4                counter--;
+  67   4                TL1 = 0xB0;
+  68   4                TH1 = 0x3C;
+  69   4                if (counter==0)
+  70   4                {
+  71   5                  TR1 = 0;
+  72   5                  break;
+  73   5                }     
+  74   4              }
+  75   3            }
+  76   2          }
+  77   1      }
+*** WARNING C280 IN LINE 8 OF Sa_Re.c: 'i': unreferenced local variable
+*** WARNING C280 IN LINE 8 OF Sa_Re.c: 'j': unreferenced local variable
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    111    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,144 @@
+C51 COMPILER V9.60.0.0   TIMER_GAME                                                        03/10/2021 15:31:24 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE TIMER_GAME
+OBJECT MODULE PLACED IN .\Objects\timer_game.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE timer_game.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\timer_game.lst) TABS(2) OBJECT(.\Objects\timer_game.obj)
+
+line level    source
+
+   1          #include <at89c5131.h>
+   2          #include <stdio.h>
+   3          
+   4          //Bit definitions
+   5          sbit RS=P0^0;
+   6          sbit RW= P0^1;
+   7          sbit EN=P0^2;
+   8          
+   9          sbit SW1 = P1^0;
+  10          sbit LED = P1^4;
+  11          
+  12          void msdelay(unsigned int time)
+  13          {
+  14   1        int i,j;  
+  15   1        for(i = 0 ; i < time ; i++)
+  16   1        {
+  17   2          for(j = 0; j<318 ; j++)
+  18   2          {}
+  19   2        } 
+  20   1      }
+  21          
+  22          void lcd_cmd(unsigned int i)
+  23          {
+  24   1        RS=0;
+  25   1        RW=0;
+  26   1        EN=1;
+  27   1        P2=i;
+  28   1        msdelay(10);
+  29   1        EN=0;
+  30   1      }
+  31          void lcd_char(unsigned char ch)
+  32          {
+  33   1        RS=1;
+  34   1        RW=0;
+  35   1        EN=1;
+  36   1        P2=ch;
+  37   1        msdelay(10);
+  38   1        EN=0;
+  39   1      }
+  40          void lcd_write_string(unsigned char *s)
+  41          {
+  42   1        while(*s!='\0')   
+  43   1        {
+  44   2          lcd_char(*s++);
+  45   2        }
+  46   1      }
+  47          void lcd_init(void) using 3
+  48          {
+  49   1        lcd_cmd(0x38);
+  50   1        msdelay(4);
+  51   1        lcd_cmd(0x06);
+  52   1        msdelay(4);
+  53   1        lcd_cmd(0x0C);
+  54   1        msdelay(4);
+C51 COMPILER V9.60.0.0   TIMER_GAME                                                        03/10/2021 15:31:24 PAGE 2   
+
+  55   1        lcd_cmd(0x01);
+  56   1        msdelay(4);
+  57   1      }
+  58          
+  59          void main()
+  60          {
+  61   1        unsigned char mystr1[] = "Toggle SW1";
+  62   1        unsigned char mystr2[] = "when LED glows";
+  63   1        unsigned char mystr3[] = "Reaction Time";
+  64   1        unsigned char mystr4[7];
+  65   1        unsigned int count = 0;
+  66   1        
+  67   1        TMOD = 0x01; // In case someone clicks the switch before the led turns on
+  68   1        TL0 = 0x00;
+  69   1        TH0 = 0x00;
+  70   1        
+  71   1        P1 = 00;
+  72   1        while(1)
+  73   1        {
+  74   2          SW1 = 1; //Make the pin as the input 
+  75   2          while(SW1 != 0)
+  76   2          {
+  77   3          }     
+  78   2          lcd_init();
+  79   2          lcd_cmd(0x83);
+  80   2          lcd_write_string(mystr1);
+  81   2          lcd_cmd(0xC1);
+  82   2          lcd_write_string(mystr2);
+  83   2          msdelay(2000);
+  84   2          LED = 1;  
+  85   2          TMOD = 0x01;              // Timer 0, Mode 1
+  86   2          TL0 = 0x00;
+  87   2          TH0 = 0x00;
+  88   2          TR0 = 1;
+  89   2          while(SW1 != 1)
+  90   2          {
+  91   3            if (TF0 == 1)
+  92   3            {
+  93   4              count++;
+  94   4              TF0 = 0;
+  95   4            }
+  96   3            
+  97   3          }
+  98   2          TR0 = 0;
+  99   2          LED = 0;
+ 100   2          lcd_init();
+ 101   2          lcd_cmd(0x81);
+ 102   2          lcd_write_string(mystr3);
+ 103   2          lcd_cmd(0xC3);
+ 104   2          sprintf(mystr4, "%02X %02X%02X",count, (unsigned int)(TL0 & 0xFF),(unsigned int)(TH0 & 0xFF));
+ 105   2          lcd_write_string(mystr4);
+ 106   2          msdelay(5000);
+ 107   2          count = 0;
+ 108   2          lcd_init();
+ 109   2          
+ 110   2          
+ 111   2          // In case someone clicks the switch before the led turns on
+ 112   2          TL0 = 0x00;
+ 113   2          TH0 = 0x00;
+ 114   2          TF0 = 0;
+ 115   2        } 
+ 116   1      }
+C51 COMPILER V9.60.0.0   TIMER_GAME                                                        03/10/2021 15:31:24 PAGE 3   
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    392    ----
+   CONSTANT SIZE    =     54    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      52
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

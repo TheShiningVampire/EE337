@@ -1,0 +1,41 @@
+A51 MACRO ASSEMBLER  ADD_NUMBERS                                                          01/20/2021 15:38:49 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Add_numbers.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Add_numbers.asm SET(SMALL) DEBUG PRINT(.\Listings\Add_numbers.lst) OBJE
+                      CT(.\Objects\Add_numbers.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     Org 0h
+0000 020100            2     ljmp main; jump to label "main"
+0100                   3     Org 100h
+0100                   4     main:
+0100 75704E            5             MOV 70H,#4EH    ;Loading value 20h in memory location 70h
+0103 7571F0            6             MOV 71H,#0F0H   ;Loading value 21h in memory location 71h
+                       7     
+0106 E570              8             MOV A,70H       ;Moving the content of memory location 70h to accumulator
+0108 2571              9             ADD A,71H       ;Adding the content of memory location 70h to accumulator
+010A F572             10             MOV 72H, A      ;Moving the content of accumulator to the memory location 70h  
+010C 757300           11             MOV 73H, #00H
+010F 5003             12             JNC HERE;
+0111 757301           13             MOV 73H, #01H
+0114 80FE             14     HERE:SJMP HERE          
+                      15     END
+A51 MACRO ASSEMBLER  ADD_NUMBERS                                                          01/20/2021 15:38:49 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0114H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

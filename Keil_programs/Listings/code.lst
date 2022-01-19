@@ -1,0 +1,235 @@
+A51 MACRO ASSEMBLER  CODE                                                                 01/20/2021 14:34:19 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\code.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE code.asm SET(SMALL) DEBUG PRINT(.\Listings\code.lst) OBJECT(.\Objects\c
+                      ode.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0h
+0000 020100            2     ljmp main;
+0100                   3     org 100h
+0100                   4     main:
+0100 75701B            5             MOV 70h,#01Bh;
+0103 75712D            6             MOV 71h,#02Dh;
+0106 857020            7             mov 20h,70h;
+0109 752100            8             mov 21h,#0h;
+                       9             
+010C A204             10             mov c,20h.4;
+010E 9208             11             mov 21h.0,c;
+                      12             
+0110 A205             13             mov c,20h.5;
+0112 9209             14             mov 21h.1,c;
+                      15             
+0114 A206             16             mov c,20h.6;
+0116 920A             17             mov 21h.2,c;
+                      18             
+0118 A207             19             mov c,20h.7;
+011A 920B             20             mov 21h.3,c;
+                      21             
+011C C204             22             clr 20h.4;
+011E C205             23             clr 20h.5;
+0120 C206             24             clr 20h.6;
+0122 C207             25             clr 20h.7;
+                      26             
+0124 752200           27             mov 22h,#0h;
+0127 A200             28             mov c,20h.0;
+0129 9210             29             mov 22h.0,c;
+                      30             
+012B 752300           31             mov 23h,#0h;
+012E A201             32             mov c,20h.1;
+0130 9218             33             mov 23h.0,c;
+                      34                     
+0132 752400           35             mov 24h,#0h;
+0135 A202             36             mov c,20h.2;
+0137 9220             37             mov 24h.0,c;
+                      38             
+0139 752500           39             mov 25h,#0h;
+013C A203             40             mov c,20h.3;
+013E 9228             41             mov 25h.0,c;
+                      42             
+0140 752600           43             mov 26h,#0h;
+0143 A208             44             mov c,21h.0;
+0145 9230             45             mov 26h.0,c;
+                      46             
+0147 752700           47             mov 27h,#0h;
+014A A209             48             mov c,21h.1;
+014C 9238             49             mov 27h.0,c;
+                      50             
+014E 752800           51             mov 28h,#0h;
+0151 A20A             52             mov c,21h.2;
+0153 9240             53             mov 28h.0,c;
+                      54             
+0155 752900           55             mov 29h,#0h;
+0158 A20B             56             mov c,21h.3;
+015A 9248             57             mov 29h.0,c;
+A51 MACRO ASSEMBLER  CODE                                                                 01/20/2021 14:34:19 PAGE     2
+
+                      58             
+015C E522             59             mov A,22h;
+015E 6524             60             xrl A,24h;
+0160 6525             61             xrl A,25h;
+0162 A2E0             62             mov c,acc.0;
+0164 9204             63             mov 20h.4,c;
+                      64             
+                      65             
+0166 E522             66             mov A,22h;
+0168 6523             67             xrl A,23h;
+016A 6525             68             xrl A,25h;
+016C A2E0             69             mov c,acc.0;
+016E 9205             70             mov 20h.5,c;
+                      71             
+0170 E524             72             mov A,24h;
+0172 6523             73             xrl A,23h;
+0174 6525             74             xrl A,25h;
+0176 A2E0             75             mov c,acc.0;
+0178 9206             76             mov 20h.6,c;
+                      77             
+017A 852072           78             mov 72h,20h;
+                      79             
+                      80             
+017D E526             81             mov A,26h;
+017F 6528             82             xrl A,28h;
+0181 6529             83             xrl A,29h;
+0183 A2E0             84             mov c,acc.0;
+0185 920C             85             mov 21h.4,c;
+                      86             
+                      87             
+0187 E526             88             mov A,26h;
+0189 6527             89             xrl A,27h;
+018B 6529             90             xrl A,29h;
+018D A2E0             91             mov c,acc.0;
+018F 920D             92             mov 21h.5,c;
+                      93             
+0191 E528             94             mov A,28h;
+0193 6527             95             xrl A,27h;
+0195 6529             96             xrl A,29h;
+0197 A2E0             97             mov c,acc.0;
+0199 920E             98             mov 21h.6,c;
+                      99             
+019B 852173          100             mov 73h,21h;
+                     101             
+                     102             
+019E 857120          103             mov 20h,71h;
+01A1 752100          104             mov 21h,#0h;
+                     105             
+01A4 A204            106             mov c,20h.4;
+01A6 9208            107             mov 21h.0,c;
+                     108             
+01A8 A205            109             mov c,20h.5;
+01AA 9209            110             mov 21h.1,c;
+                     111             
+01AC A206            112             mov c,20h.6;
+01AE 920A            113             mov 21h.2,c;
+                     114             
+01B0 A207            115             mov c,20h.7;
+01B2 920B            116             mov 21h.3,c;
+                     117             
+01B4 C204            118             clr 20h.4;
+01B6 C205            119             clr 20h.5;
+01B8 C206            120             clr 20h.6;
+01BA C207            121             clr 20h.7;
+                     122             
+01BC 752200          123             mov 22h,#0h;
+A51 MACRO ASSEMBLER  CODE                                                                 01/20/2021 14:34:19 PAGE     3
+
+01BF A200            124             mov c,20h.0;
+01C1 9210            125             mov 22h.0,c;
+                     126             
+01C3 752300          127             mov 23h,#0h;
+01C6 A201            128             mov c,20h.1;
+01C8 9218            129             mov 23h.0,c;
+                     130                     
+01CA 752400          131             mov 24h,#0h;
+01CD A202            132             mov c,20h.2;
+01CF 9220            133             mov 24h.0,c;
+                     134             
+01D1 752500          135             mov 25h,#0h;
+01D4 A203            136             mov c,20h.3;
+01D6 9228            137             mov 25h.0,c;
+                     138             
+01D8 752600          139             mov 26h,#0h;
+01DB A208            140             mov c,21h.0;
+01DD 9230            141             mov 26h.0,c;
+                     142             
+01DF 752700          143             mov 27h,#0h;
+01E2 A209            144             mov c,21h.1;
+01E4 9238            145             mov 27h.0,c;
+                     146             
+01E6 752800          147             mov 28h,#0h;
+01E9 A20A            148             mov c,21h.2;
+01EB 9240            149             mov 28h.0,c;
+                     150             
+01ED 752900          151             mov 29h,#0h;
+01F0 A20B            152             mov c,21h.3;
+01F2 9248            153             mov 29h.0,c;
+                     154             
+01F4 E522            155             mov A,22h;
+01F6 6524            156             xrl A,24h;
+01F8 6525            157             xrl A,25h;
+01FA A2E0            158             mov c,acc.0;
+01FC 9204            159             mov 20h.4,c;
+                     160             
+                     161             
+01FE E522            162             mov A,22h;
+0200 6523            163             xrl A,23h;
+0202 6525            164             xrl A,25h;
+0204 A2E0            165             mov c,acc.0;
+0206 9205            166             mov 20h.5,c;
+                     167             
+0208 E524            168             mov A,24h;
+020A 6523            169             xrl A,23h;
+020C 6525            170             xrl A,25h;
+020E A2E0            171             mov c,acc.0;
+0210 9206            172             mov 20h.6,c;
+                     173             
+0212 852074          174             mov 74h,20h;
+                     175             
+                     176             
+0215 E526            177             mov A,26h;
+0217 6528            178             xrl A,28h;
+0219 6529            179             xrl A,29h;
+021B A2E0            180             mov c,acc.0;
+021D 920C            181             mov 21h.4,c;
+                     182             
+                     183             
+021F E526            184             mov A,26h;
+0221 6527            185             xrl A,27h;
+0223 6529            186             xrl A,29h;
+0225 A2E0            187             mov c,acc.0;
+0227 920D            188             mov 21h.5,c;
+                     189             
+A51 MACRO ASSEMBLER  CODE                                                                 01/20/2021 14:34:19 PAGE     4
+
+0229 E528            190             mov A,28h;
+022B 6527            191             xrl A,27h;
+022D 6529            192             xrl A,29h;
+022F A2E0            193             mov c,acc.0;
+0231 920E            194             mov 21h.6,c;
+                     195             
+0233 852175          196             mov 75h,21h;
+                     197             
+                     198             
+                     199             
+0236 8000            200             sjmp en
+0238 80FE            201             en: sjmp en
+                     202     end
+A51 MACRO ASSEMBLER  CODE                                                                 01/20/2021 14:34:19 PAGE     5
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+EN . . . . . . . .  C ADDR   0238H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

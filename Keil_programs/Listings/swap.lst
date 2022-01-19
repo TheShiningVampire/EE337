@@ -1,0 +1,39 @@
+A51 MACRO ASSEMBLER  SWAP                                                                 01/19/2021 23:34:04 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\swap.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE swap.asm SET(SMALL) DEBUG PRINT(.\Listings\swap.lst) OBJECT(.\Objects\s
+                      wap.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     Org 0h; Org is an assembler directive used to specify location of next instruction
+0000 020100            2     ljmp main; jump to label "main"
+0100                   3     Org 100h
+0100                   4     main:
+0100 757020            5             MOV 70H,#20H    ;Loading value 20h in memory location 70h
+0103 757121            6             MOV 71H,#21H    ;Loading value 21h in memory location 71h
+                       7     
+0106 E570              8             MOV A,70H       ;Moving the content of memory location 70h to accumulator
+0108 857170            9             MOV 70H,71H     ;Moving the content of memory location 71h to memory location 70h
+010B F571             10             MOV 71H,A       ;Moving accumulator content into memory location 71h
+                      11      
+010D 80FE             12     HERE:SJMP HERE          
+                      13     END
+A51 MACRO ASSEMBLER  SWAP                                                                 01/19/2021 23:34:04 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   010DH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

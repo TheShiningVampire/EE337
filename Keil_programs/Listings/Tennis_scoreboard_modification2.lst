@@ -1,0 +1,360 @@
+C51 COMPILER V9.60.0.0   TENNIS_SCOREBOARD_MODIFICATION2                                   04/06/2021 23:54:36 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE TENNIS_SCOREBOARD_MODIFICATION2
+OBJECT MODULE PLACED IN .\Objects\Tennis_scoreboard_modification2.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Uart\Tennis_scoreboard_modification2.c OPTIMIZE(8,SPEED) BROWSE DEBUG OB
+                    -JECTEXTEND PRINT(.\Listings\Tennis_scoreboard_modification2.lst) TABS(2) OBJECT(.\Objects\Tennis_scoreboard_modification
+                    -2.obj)
+
+line level    source
+
+   1          #include <at89c5131.h>
+   2          #include <stdio.h>
+   3          #include "lcd.h"    //Header file with LCD interfacing functions
+   4          #include "serial.c" //C file with UART interfacing functions
+   5          
+   6          unsigned int s1;
+   7          unsigned int s2;
+   8          unsigned int g1;
+   9          unsigned int g2;
+  10          unsigned int p1;
+  11          unsigned int p2;
+  12          
+  13          //Functions used in this program
+  14          void initialise_score(void);
+  15          void game_update(void);
+  16          bit score_update(void);
+  17          void set_update(void);
+  18          void setbreaker(void);
+  19          
+  20          void initialise_score()
+  21          {
+  22   1        p1 = 0;
+  23   1        p2 = 0;
+  24   1        g1 = 0;
+  25   1        g2 = 0;
+  26   1        s1 = 0;
+  27   1        s2 = 0;
+  28   1      }
+  29          
+  30          void game_update()
+  31          {
+  32   1        unsigned char game1[1] , game2[1];
+  33   1      
+  34   1        sprintf(game1 , "%d" , g1);
+  35   1        sprintf(game2 , "%d" , g2);
+  36   1        
+  37   1        
+  38   1        if(s1+s2 == 0)
+  39   1        {
+  40   2          lcd_cmd(0x85);    
+  41   2          lcd_write_string(game1);
+  42   2          lcd_cmd(0x86);
+  43   2          lcd_write_string("-");
+  44   2          lcd_cmd(0x87);
+  45   2          lcd_write_string(game2);    
+  46   2        }
+  47   1        if(s1+s2 == 1)
+  48   1        {
+  49   2          lcd_cmd(0x89);    
+  50   2          lcd_write_string(game1);
+  51   2          lcd_cmd(0x8A);
+  52   2          lcd_write_string("-");
+  53   2          lcd_cmd(0x8B);
+C51 COMPILER V9.60.0.0   TENNIS_SCOREBOARD_MODIFICATION2                                   04/06/2021 23:54:36 PAGE 2   
+
+  54   2          lcd_write_string(game2);    
+  55   2        }
+  56   1        if(s1+s2 == 2)
+  57   1        {
+  58   2          lcd_cmd(0x8D);    
+  59   2          lcd_write_string(game1);
+  60   2          lcd_cmd(0x8E);
+  61   2          lcd_write_string("-");
+  62   2          lcd_cmd(0x8F);
+  63   2          lcd_write_string(game2);    
+  64   2        } 
+  65   1      }
+  66          
+  67          bit score_update()
+  68          {   
+  69   1          bit game_done = 0;
+  70   1          unsigned char scores_map[5][2] = {"00" , "15" , "30" , "40" , "Ad"};
+  71   1          unsigned char score[5];
+  72   1          lcd_cmd(0xC7);
+  73   1          if(p1>=4 || p2>=4)
+  74   1          { 
+  75   2            if(p1 == 4 && p2<=2)
+  76   2            {
+  77   3              g1++;
+  78   3              lcd_write_string("00-00");
+  79   3              game_update();
+  80   3              game_done = 1;
+  81   3            }
+  82   2            
+  83   2            if(p2 == 4 && p1<=2)
+  84   2            {
+  85   3              g2++;
+  86   3              lcd_write_string("00-00");
+  87   3              game_update();
+  88   3              game_done = 1;
+  89   3            }
+  90   2            
+  91   2            else
+  92   2            {
+  93   3              if(p1>p2)
+  94   3              {
+  95   4                if( p1 - p2 == 0)
+  96   4                {
+  97   5                  lcd_write_string("40-40");
+  98   5                }
+  99   4                if( p1 - p2 == 1)
+ 100   4                {
+ 101   5                  lcd_write_string("Ad-40");
+ 102   5                }
+ 103   4                if( p1 - p2 == 2)
+ 104   4                {
+ 105   5                  g1++;
+ 106   5                  lcd_write_string("00-00");
+ 107   5                  game_update();
+ 108   5                  game_done = 1;            
+ 109   5                }
+ 110   4              }
+ 111   3              else if(p2>p1)
+ 112   3              {
+ 113   4                if( p2 - p1 == 1)
+ 114   4                {
+ 115   5                  lcd_write_string("40-Ad");
+C51 COMPILER V9.60.0.0   TENNIS_SCOREBOARD_MODIFICATION2                                   04/06/2021 23:54:36 PAGE 3   
+
+ 116   5                }
+ 117   4                if( p2 - p1 == 2)
+ 118   4                {
+ 119   5                  g2++;
+ 120   5                  lcd_write_string("00-00");
+ 121   5                  game_update();
+ 122   5                  game_done = 1;            
+ 123   5                }
+ 124   4              }
+ 125   3              else
+ 126   3              {
+ 127   4                lcd_write_string("40-40");
+ 128   4              }
+ 129   3              
+ 130   3            }
+ 131   2            
+ 132   2            
+ 133   2          }
+ 134   1          else
+ 135   1          {
+ 136   2            sprintf(score , "%s-%s",scores_map[p1] , scores_map[p2]);
+ 137   2            lcd_write_string(score);
+ 138   2          } 
+ 139   1        
+ 140   1        return game_done;
+ 141   1      }
+ 142          
+ 143          void set_update()
+ 144          {
+ 145   1            if(g1 >=6 || g2>=6)
+ 146   1              {
+ 147   2                if(g1>=6 && g2<=4)
+ 148   2                {
+ 149   3                  g1 = 0;
+ 150   3                  g2 = 0;
+ 151   3                  s1++;
+ 152   3                }
+ 153   2                
+ 154   2                else if(g2>=6 && g1<=4)
+ 155   2                {
+ 156   3                  g1 = 0;
+ 157   3                  g2 = 0;
+ 158   3                  s2++;
+ 159   3                }
+ 160   2      
+ 161   2                if(s1 == 2)
+ 162   2                {
+ 163   3                  lcd_cmd(0x01);
+ 164   3                  lcd_cmd(0x81);
+ 165   3                  lcd_write_string("Player 1 Wins");
+ 166   3                }
+ 167   2              
+ 168   2                else if(s2 == 2)
+ 169   2                {
+ 170   3                  lcd_cmd(0x01);
+ 171   3                  lcd_cmd(0x81);
+ 172   3                  lcd_write_string("Player 2 Wins");
+ 173   3                }
+ 174   2                
+ 175   2                else
+ 176   2                {
+ 177   3                  game_update();
+C51 COMPILER V9.60.0.0   TENNIS_SCOREBOARD_MODIFICATION2                                   04/06/2021 23:54:36 PAGE 4   
+
+ 178   3                }
+ 179   2                          
+ 180   2                if(g1 == 6 && g2 == 6)
+ 181   2                {
+ 182   3                  setbreaker();
+ 183   3                }       
+ 184   2              } 
+ 185   1      }
+ 186          
+ 187          void setbreaker()
+ 188          {
+ 189   1        bit done = 0;   
+ 190   1        unsigned char ch=0;
+ 191   1        unsigned char points[5];
+ 192   1        while(!done)
+ 193   1        {
+ 194   2          //Receive a character
+ 195   2            ch = receive_char();
+ 196   2          
+ 197   2          //Displays the string on the terminal software
+ 198   2            switch(ch)
+ 199   2            {
+ 200   3              case '1': p1++;
+ 201   3                  break;
+ 202   3              
+ 203   3              case '2': p2++;
+ 204   3                   break;
+ 205   3                    
+ 206   3              default:transmit_string("Incorrect. Pass correct number\r\n");
+ 207   3                   break;
+ 208   3              
+ 209   3            }
+ 210   2            
+ 211   2            sprintf(points,"%02d-%02d",p1,p2);
+ 212   2            //sprintf(point2,"%02d",p2);
+ 213   2            
+ 214   2            lcd_cmd(0xC7);
+ 215   2            lcd_write_string(points);
+ 216   2            /*lcd_cmd(0xC9);
+ 217   2            lcd_write_string("-");
+ 218   2            lcd_cmd(0xCA);
+ 219   2            lcd_write_string(point2);
+ 220   2            */
+ 221   2            if(p1>=7 || p2>=7)
+ 222   2            {
+ 223   3              if(p1> p2)
+ 224   3              {
+ 225   4                if(p1 - p2 >=2)
+ 226   4                {
+ 227   5                  done = 1;
+ 228   5                  g1++;
+ 229   5                  game_update();
+ 230   5                  g1 = 0;
+ 231   5                  g2 = 0;
+ 232   5                  s1++;
+ 233   5                  game_update();
+ 234   5                }
+ 235   4              }
+ 236   3              else
+ 237   3              {
+ 238   4                if(p2 - p1 >=2)
+ 239   4                {
+C51 COMPILER V9.60.0.0   TENNIS_SCOREBOARD_MODIFICATION2                                   04/06/2021 23:54:36 PAGE 5   
+
+ 240   5                  done = 1;
+ 241   5                  g2++;
+ 242   5                  game_update();
+ 243   5                  g1 = 0;
+ 244   5                  g2 = 0;
+ 245   5                  s2++;
+ 246   5                  game_update();
+ 247   5                }
+ 248   4              } 
+ 249   3            }
+ 250   2        }
+ 251   1        
+ 252   1        p1 = 0;
+ 253   1        p2 = 0;
+ 254   1        
+ 255   1        score_update();
+ 256   1        game_update();
+ 257   1        set_update();
+ 258   1      }
+ 259          
+ 260          //Main function
+ 261          void main(void)
+ 262          {
+ 263   1        unsigned char ch=0;
+ 264   1        bit game;
+ 265   1        
+ 266   1        //Call initialization functions
+ 267   1        lcd_init();
+ 268   1        uart_init();
+ 269   1      
+ 270   1        //These strings will be printed in terminal software
+ 271   1        transmit_string("************************\r\n");
+ 272   1        transmit_string("******TENNIS MATCH******\r\n");
+ 273   1        transmit_string("************************\r\n");
+ 274   1        transmit_string("Press 1 if Player 1 wins the point\r\n");
+ 275   1        transmit_string("Press 2 if Player 2 wins the point\r\n");
+ 276   1      
+ 277   1        
+ 278   1        while(1)
+ 279   1        {
+ 280   2          
+ 281   2          initialise_score();
+ 282   2          lcd_cmd(0x01);
+ 283   2          lcd_cmd(0x82);
+ 284   2          lcd_write_string("TENNIS MATCH");
+ 285   2          
+ 286   2          msdelay(500);
+ 287   2          lcd_cmd(0x01);
+ 288   2          lcd_cmd(0x80);
+ 289   2          lcd_write_string("GAME");
+ 290   2          lcd_cmd(0xC0);
+ 291   2          lcd_write_string("SCORE");
+ 292   2          
+ 293   2          score_update();
+ 294   2          game_update();
+ 295   2          
+ 296   2          while(s1<2 && s2<2)
+ 297   2          {   
+ 298   3              //Receive a character
+ 299   3              ch = receive_char();
+ 300   3              //Decide which test function to run based on character sent
+ 301   3              //Displays the string on the terminal software
+C51 COMPILER V9.60.0.0   TENNIS_SCOREBOARD_MODIFICATION2                                   04/06/2021 23:54:36 PAGE 6   
+
+ 302   3              switch(ch)
+ 303   3              {
+ 304   4                case '1': p1++; 
+ 305   4                    break;
+ 306   4                
+ 307   4                case '2': p2++;
+ 308   4                    break;
+ 309   4                      
+ 310   4                default:transmit_string("Incorrect test. Pass correct number\r\n");
+ 311   4                    break;
+ 312   4                
+ 313   4              }
+ 314   3                
+ 315   3              game  = score_update();
+ 316   3              if(game == 1)
+ 317   3              {
+ 318   4                p1 = 0;
+ 319   4                p2 = 0;       
+ 320   4                set_update();
+ 321   4              }
+ 322   3          }
+ 323   2          msdelay(5000);    
+ 324   2        }
+ 325   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1532    ----
+   CONSTANT SIZE    =    306    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     12      33
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2       3
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
